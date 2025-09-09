@@ -7,10 +7,18 @@ import Blogs from './components/Header/Blogs/Blogs'
 import Booksmarks from './components/Booksmarks/Booksmarks'
 
 function App() {
-  const [bookmarks, setBookmarks] = useState([])
+  const [bookmarks, setBookmarks] = useState([]) ;
+
+  const [readingTime  , setReadingTime] = useState(0) ;
 
   const handleAddToBookmark = blog =>{
-    console.log('bookmarks adding soon ')
+       const newBookmarks = [...bookmarks ,blog] ;
+       setBookmarks(newBookmarks ) ;
+  }
+
+  const handleMarkAsRead = time =>{
+     const newReadingTime = readingTime + time ;
+     setReadingTime(newReadingTime) ;
   }
 
   return (
@@ -19,8 +27,11 @@ function App() {
       
       <Header></Header>
      <div className='md:flex max-w-7xl  mx-auto'>
-      <Blogs handleAddToBookmark={handleAddToBookmark}></Blogs>
-      <Booksmarks></Booksmarks>
+      <Blogs handleAddToBookmark={handleAddToBookmark} 
+      handleMarkAsRead = {handleMarkAsRead}></Blogs>
+      <Booksmarks bookmarks={bookmarks} 
+       readingTime = {readingTime}
+      ></Booksmarks>
      </div>
      
     </>
